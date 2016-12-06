@@ -178,7 +178,12 @@
         var default_class = ed.getParam("uploadimage_default_img_class", "");
         var figure = ed.getParam("uploadimage_figure", false);
         var alt_text = getInputValue("alt");
-
+        if(alt_text == ""){
+          alt_text = json["filename"];
+        }
+        if(json["file"] !== undefined){
+          return "<a href='"+json["file"]["url"]+"'>"+alt_text+"</a>";
+        }
         var imgstr = "<img src='" + json["image"]["url"] + "'";
 
         if(default_class != "")
