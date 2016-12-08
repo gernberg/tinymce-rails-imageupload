@@ -17,7 +17,7 @@
           body: [
             {type: 'iframe',  url: 'javascript:void(0)'},
             {type: 'textbox', name: 'file', label: ed.translate('Choose a file'), subtype: 'file'},
-            {type: 'textbox', name: 'alt',  label: ed.translate('File description')},
+            {type: 'textbox', name: 'alt',  label: ed.translate('Link text')},
             {type: 'container', classes: 'error', html: "<p style='color: #b94a48;'>&nbsp;</p>"},
 
             // Trick TinyMCE to add a empty div that "preloads" the throbber image
@@ -182,7 +182,7 @@
           alt_text = json["filename"];
         }
         if(json["file"] !== undefined){
-          return "<a href='"+json["file"]["url"]+"'>"+alt_text+"</a>";
+          return "<a target='_blank' href='"+json["file"]["url"]+"'>"+alt_text+"</a>";
         }
         var imgstr = "<img src='" + json["image"]["url"] + "'";
 
