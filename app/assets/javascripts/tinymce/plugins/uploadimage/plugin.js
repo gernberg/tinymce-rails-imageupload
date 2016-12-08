@@ -11,13 +11,13 @@
 
       function showDialog() {
         win = editor.windowManager.open({
-          title: ed.translate('Insert an image from your computer'),
+          title: ed.translate('Insert a file from your computer'),
           width:  520 + parseInt(editor.getLang('uploadimage.delta_width', 0), 10),
           height: 180 + parseInt(editor.getLang('uploadimage.delta_height', 0), 10),
           body: [
             {type: 'iframe',  url: 'javascript:void(0)'},
-            {type: 'textbox', name: 'file', label: ed.translate('Choose an image'), subtype: 'file'},
-            {type: 'textbox', name: 'alt',  label: ed.translate('Image description')},
+            {type: 'textbox', name: 'file', label: ed.translate('Choose an file'), subtype: 'file'},
+            {type: 'textbox', name: 'alt',  label: ed.translate('File description')},
             {type: 'container', classes: 'error', html: "<p style='color: #b94a48;'>&nbsp;</p>"},
 
             // Trick TinyMCE to add a empty div that "preloads" the throbber image
@@ -145,7 +145,7 @@
             ed.windowManager.close();
           }
         } catch(e) {
-          handleError('Got a bad response from the server');
+          handleError('Got a bad response from the server ('+e+')');
         }
       }
 
