@@ -16,7 +16,7 @@
           height: 180 + parseInt(editor.getLang('uploadimage.delta_height', 0), 10),
           body: [
             {type: 'iframe',  url: 'javascript:void(0)'},
-            {type: 'textbox', name: 'file', label: ed.translate('Choose an file'), subtype: 'file'},
+            {type: 'textbox', name: 'file', label: ed.translate('Choose a file'), subtype: 'file'},
             {type: 'textbox', name: 'alt',  label: ed.translate('File description')},
             {type: 'container', classes: 'error', html: "<p style='color: #b94a48;'>&nbsp;</p>"},
 
@@ -239,14 +239,14 @@
 
       // Add a button that opens a window
       editor.addButton('uploadimage', {
-        tooltip: ed.translate('Insert an image from your computer'),
+        tooltip: ed.translate('Insert a file from your computer'),
         icon : 'image',
         onclick: showDialog
       });
 
       // Adds a menu item to the tools menu
       editor.addMenuItem('uploadimage', {
-        text: ed.translate('Insert an image from your computer'),
+        text: ed.translate('Insert a file from your computer'),
         icon : 'image',
         context: 'insert',
         onclick: showDialog
