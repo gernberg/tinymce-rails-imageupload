@@ -7,6 +7,7 @@
           iframe,
           win,
           throbber,
+          insertAsLink = false,
           editor = ed;
 
       function showDialog() {
@@ -25,13 +26,18 @@
           ],
           buttons: [
             {
-              text: ed.translate('Insert'),
-              onclick: insertImage,
+              text: ed.translate('Cancel'),
+              onclick: ed.windowManager.close
+            },
+            {
+              text: ed.translate('Insert as link'),
+              onclick: insertImageAsLink,
               subtype: 'primary'
             },
             {
-              text: ed.translate('Cancel'),
-              onclick: ed.windowManager.close
+              text: ed.translate('Insert'),
+              onclick: insertImageAsEmbedded,
+              subtype: 'primary'
             }
           ],
         }, {
@@ -86,6 +92,7 @@
                 'webkitBoxShadow': 'none',
               });
             } else {
+              console.log(ctrl)
               ctrl.name = "alt";
             }
           }
@@ -94,7 +101,15 @@
         body.appendChild(form);
       }
 
-      function insertImage() {
+      function insertImageAsLink() {
+        insertAsLink = true;
+        insertImage();
+      }
+      function insertImageAsEmbedded() {
+        insertAsLink = false;
+        insertImage();
+      }
+      function insertImage(){
         if(getInputValue("file") == "") {
           return handleError('You must choose a file');
         }
@@ -184,6 +199,9 @@
         if(json["file"] !== undefined){
           return "<a target='_blank' href='"+json["file"]["url"]+"'>"+alt_text+"</a>";
         }
+        if(insertAsLink){
+          return "<a target='_blank' href='"+json["image"]["url"]+"'>"+alt_text+"</a>";
+        }
         var imgstr = "<img src='" + json["image"]["url"] + "'";
 
         if(default_class != "")
@@ -218,13 +236,20 @@
       }
 
       function getInputValue(name) {
+        var input = getInput(name);
+        if(input == undefined){
+          return "";
+        }else{
+          return input.value
+        }
+      }
+      function getInput(name) {
         var inputs = form.getElementsByTagName("input");
-
         for(var i in inputs)
           if(inputs[i].name == name)
-            return inputs[i].value;
+            return inputs[i];
 
-        return "";
+        return undefined;
       }
 
       function getMetaContents(mn) {
